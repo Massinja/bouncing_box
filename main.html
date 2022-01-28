@@ -1,0 +1,121 @@
+<html style='background-color: black'>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <div id="my_bouncing_box" style= "background-color: blue; border-radius: 3px; position: absolute; left: 0px; top: 0px; min-width: 100px; min-height: 100px; text-align: center; font-weight: bold; color: #999;" >
+      abdulmen_e</div>
+           
+    <script type="text/javascript">
+
+    let my_box = document.getElementById("my_bouncing_box");
+    let y = 0;
+    let x = 0;
+    let dir = "downright";
+    let boxDiameter = 100;
+    let rightWall = window.innerWidth; 
+    let bottomWall = window.innerHeight;
+    let rightMarginX = rightWall - boxDiameter;
+    let bottomMarginY = bottomWall - boxDiameter;
+
+function upRight(){
+    dir = "upright";
+    x++;
+    y--;
+};
+
+function upLeft(){
+    dir = "upleft";
+    x--;
+    y--;
+};
+
+function downRight(){
+    dir = "downright";
+    x++;
+    y++;
+};
+
+function downLeft(){
+    dir = "downleft";
+    x--;
+    y++;
+};
+
+
+function moving_box(){
+
+    if(dir == "downright"){
+        if(x==0 && y==0){
+            downRight();
+        }
+        else if(x== rightMarginX && y == bottomMarginY){
+            upLeft();
+        }
+        else if((x < rightMarginX) && (y < bottomMarginY)){
+            downRight();
+        }    
+        else if((x == rightMarginX) && (y < bottomMarginY)){
+            downLeft();
+        }
+        else if((x < rightMarginX) && (y == bottomMarginY)){
+            upRight();      
+        };
+    }
+
+    else if(dir == "upright"){
+        if(x == rightMarginX && y == 0){
+            downLeft();
+        }
+        else if((x < rightMarginX) && (y > 0)){
+            upRight();
+        }
+        else if((x < rightMarginX) && (y == 0)){
+            downRight();
+        }
+        else if((x == rightMarginX) && (y > 0)){
+            upLeft();
+        };   
+    }
+
+    else if(dir == "downleft"){
+        if(x==0 && y == bottomMarginY){
+            upRight();
+        }
+        else if((x > 0 ) && (y < bottomMarginY)){
+            downLeft();
+        }
+        else if(x == 0 && y < bottomMarginY){
+            downRight();
+        }
+        else if((x < rightMarginX) && (y == bottomMarginY)){
+            upLeft();
+        };
+    }
+
+    else if(dir == "upleft"){
+        if(x==0 && y==0){
+            downRight();
+        }
+        else if((x > 0) && (y > 0)){
+            upLeft();
+        }
+        else if((x == 0) && (y < bottomMarginY)){
+            upRight();
+        }
+        else if((x > 0) && (y == 0)){
+            downLeft();
+        };
+    }
+
+    my_box.style.left = x + "px";
+    my_box.style.top = y + "px";
+    return {x, y, dir};
+
+};
+
+setInterval(moving_box, 10);
+ 
+ 
+</script>
+</head>
+</html>
